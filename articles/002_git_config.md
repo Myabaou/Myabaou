@@ -12,7 +12,7 @@ published: true # 公開設定（falseにすると下書き）
 
 設定しないと`fatal: unable to auto-detect email address`が起こる。
 - 参考
-https://qiita.com/w-tdon/items/24348728c9256e5bf945
+@[card](https://qiita.com/w-tdon/items/24348728c9256e5bf945)
 
 ### global(全体)
 
