@@ -16,6 +16,7 @@ published: true # 公開設定（falseにすると下書き）
 ### (例)AWS-ApplyAnsiblePlaybooksの実行の場合
 
 ```bash
+_INSTANCE_ID="i-XXXXXXXXX"
 _USER_NAME="'テスト ユーザー'"
 _USER_EMAIL=hoge@test.com
 ```
