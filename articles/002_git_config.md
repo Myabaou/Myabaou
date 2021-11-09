@@ -45,3 +45,5 @@ git config --local user.email メールアドレス
 `リポジトリ名/.git/config` に情報が追記されている。
 
 
+---
+iphone から投稿テスト
