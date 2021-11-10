@@ -64,7 +64,7 @@ git branch -a
 ### 前提条件
 codecommit操作可能な権限を所持かつ AWS profile設定済（AWS　SSOでもOK)
 
-- SSH版
+### SSH版
 1. AWSコンソールでIAM SSH鍵を払い出す。
 @[card](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html)
 2. `~/.ssh/config`に以下を定義
@@ -80,7 +80,7 @@ git clone ssh://AXXXXXXXXXXXXX001@git-codecommit.us-east-2.amazonaws.com/v1/repo
 @[card](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html#setting-up-ssh-unixes-connect-console)
 
 
-- HTTPS版
+### HTTPS版
 公式だと以下だが、想定した通りの挙動にならなかったので、個人用のまとめる。
 @[card](https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html)
 1. AWSコンソールでもCLIでもいいのでcodecommitのリポジトリを作成する。
