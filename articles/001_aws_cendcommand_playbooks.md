@@ -35,3 +35,24 @@ aws ssm send-command \
 
 `targets`の箇所はすんなりいくけど`parameters`の箇所がやっかい
 
+
+## AWS-ApplyAnsiblePlaybooksを実行した場合の格納場所
+
+`i-XXXXXXXXXXX`は実行対象のインスタンスID
+`/var/lib/amazon/ssm/i-XXXXXXXXXXX/document/orchestration/`
+配下にユニークIDのディレクトリがある。
+
+
+- /var/lib/amazon/ssm/i-XXXXXXXXXXX/document/orchestration/XXXXXXXXXXXXXXXXXXXX/downloads/
+```bash
+├── ansible.zip
+├── main.yml
+├── readme.md
+└── roles
+    ├── cloud9
+    ├── default
+    ├── docker
+    ├── git
+    ├── terraform
+    └── vscode
+```
