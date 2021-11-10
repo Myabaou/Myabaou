@@ -2,7 +2,7 @@
 title: "[Codebuild]AWS CLIで実行" # 記事のタイトル
 emoji: "💻" # アイキャッチとして使われる絵文字（1文字だけ）
 type: "tech" # tech: 技術記事 / idea: アイデア記事
-topics: ["aws"] # タグ。["markdown", "rust", "aws"]のように指定する
+topics: ["aws","AWSCLI"] # タグ。["markdown", "rust", "aws"]のように指定する
 published: true # 公開設定（falseにすると下書き）
 ---
 
@@ -10,6 +10,12 @@ published: true # 公開設定（falseにすると下書き）
 - aws cli v2 インストール済
 
 ## CodeBuild
+
+基本ここをみれば問題なし
+@[card](https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/cmd-ref.html)
+@[card](https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/run-build-cli.html)
+@[card](https://docs.aws.amazon.com/cli/latest/reference/codebuild/start-build.html)
+
 ### 変数上書き実行
 - input.json
 ```
