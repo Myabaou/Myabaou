@@ -1,5 +1,5 @@
 ---
-title: "[Git]Git config ナレッジ" # 記事のタイトル
+title: "[Git]Git config操作 ナレッジ" # 記事のタイトル
 emoji: "👨🏻‍💻" # アイキャッチとして使われる絵文字（1文字だけ）
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["git","aws"] # タグ。["markdown", "rust", "aws"]のように指定する
@@ -110,16 +110,20 @@ git remote add origin https://git-codecommit.${REGION}.amazonaws.com/v1/repos/${
 @[card](https://qiita.com/w-tdon/items/24348728c9256e5bf945)
 
 - global(全体)
-
+ユーザ設定
 ```bash
 git config --global user.name "ユーザー名"
 ```
-
+メール設定
 ```bash
 git config --global user.email メールアドレス
 ```
+確認
+```bash
+git config -l --global
+```
+補足:`~/.gitconfig` に情報が追記されている。
 
-`~/.gitconfig` に情報が追記されている。
 
 ```
 利用している環境でユーザが統一できていれば問題ないが、
@@ -128,17 +132,19 @@ git config --global user.email メールアドレス
 
 - local(該当リポジトリのみ)
 
-
+ユーザ設定
 ```bash
 git config --local user.name "ユーザー名"
 ```
-
+メール設定
 ```bash
 git config --local user.email メールアドレス
 ```
-
-`リポジトリ名/.git/config` に情報が追記されている。
+確認
+```bash
+git config -l --local
+```
+補足:`リポジトリ名/.git/config` に情報が追記されている。
 
 
 ---
-iphone から投稿テスト
