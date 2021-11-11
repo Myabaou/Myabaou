@@ -58,6 +58,22 @@ git checkout -b develop
 git branch -a
 ```
 
+- tag付与
+```bash
+git tag -a v1.0.0 -m 'Tag add.'
+```
+
+- tag push
+```bash
+git push origin v1.0.0
+```
+GitHubであればmerge後`Releases`を作成する。
+
+
+- 確認
+```bash
+git show
+```
 
 ---
 ## CodeCommit設定
