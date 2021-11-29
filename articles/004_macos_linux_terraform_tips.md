@@ -3,7 +3,7 @@ title: "[Terraform]MacOSとLinuxで併用する場合のTIPS" # 記事のタイ�
 emoji: "💻" # アイキャッチとして使われる絵文字（1文字だけ）
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws","awscli","terraform"] # タグ。["markdown", "rust", "aws"]のように指定する
-published: false # 公開設定（falseにすると下書き）
+published: true # 公開設定（falseにすると下書き）
 ---
 
 ## 概要
@@ -37,9 +37,29 @@ Initializing provider plugins...
 ```bash
 terraform providers lock \
   -platform=darwin_amd64 \
--platform=linux_amd64
+  -platform=linux_amd64
 ```
 を実行すればOK
 
 
+
+---
+
+## 実行するEC2環境にIAMロールを設定してあった場合
+
+- エラー内容
+```
+│ Error: error reading IAM Group (Test_Group): AccessDenied: User: arn:aws:sts::XXXXXXX:assumed-role/cloud9role/i-XXXXXXX is not authorized to perform: iam:GetGroup on resource: group Test_Group
+│       status code: 403, request id:
+```
+
+providerブロック内にprofileを定義して実行するようにしているが、
+おそらくIAMロールのプロファイルを優先的に利用されるため、この権限がない状態になってしまう。
+
+IAMロール　> provider 内のprofile
+
+- 解決方法
+未解決。。
+
+IAMロールをデタッチすれば成功すると思うが、それだと対象サーバにSSMログインできなくなってしまうため除外。
 
