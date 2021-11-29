@@ -53,13 +53,16 @@ terraform providers lock \
 │       status code: 403, request id:
 ```
 
-providerブロック内にprofileを定義して実行するようにしているが、
-おそらくIAMロールのプロファイルを優先的に利用されるため、この権限がない状態になってしまう。
+~~providerブロック内にprofileを定義して実行するようにしているが、~~
+~~おそらくIAMロールのプロファイルを優先的に利用されるため、この権限がない状態になってしまう。~~
 
-IAMロール　> provider 内のprofile
+~~IAMロール　> provider 内のprofile~~
+これは嘘でした。ちゃんとprofile設定がされてないことが原因
 
 - 解決方法
-未解決。。
+設定をちゃんと見直す。
 
 IAMロールをデタッチすれば成功すると思うが、それだと対象サーバにSSMログインできなくなってしまうため除外。
 
+自戒を込めて残す。
+@[card](https://zenn.dev/myabaou/scraps/0d47a24d000107)
