@@ -1,5 +1,5 @@
 ---
-title: "[Terraform]profileよりも変数設定が優先する。" # 記事のタイトル
+title: "[Terraform]profileよりも変数設定を優先する。" # 記事のタイトル
 emoji: "💻" # アイキャッチとして使われる絵文字（1文字だけ）
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws","awscli","terraform"] # タグ。["markdown", "rust", "aws"]のように指定する
