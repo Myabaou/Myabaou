@@ -7,7 +7,7 @@ published: true # 公開設定（falseにすると下書き）
 ---
 
 
-##　事象内容
+## 事象内容
 ARN名など合っているはずなのにも関わらず、ValidationErrorが発生してしまう問題
 
 ## 発生条件
