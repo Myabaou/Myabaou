@@ -31,7 +31,7 @@ ARN名など合っているはずなのにも関わらず、ValidationErrorが�
 
 ## 原因
 
-@card[https://github.com/hashicorp/terraform-provider-aws/issues/4552]
+@[card](https://github.com/hashicorp/terraform-provider-aws/issues/4552)
 多分これだよね。。（一応コメントしてみたけど）
 
 AWS　SSOのプロファイルでもregion情報は記載してあるのに。。
