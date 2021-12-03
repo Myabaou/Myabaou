@@ -1,5 +1,5 @@
 ---
-title: "[Terraform]ValidationError問題" # 記事のタイトル
+title: "[Terraform]profileよりも変数設定が優先する。" # 記事のタイトル
 emoji: "💻" # アイキャッチとして使われる絵文字（1文字だけ）
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws","awscli","terraform"] # タグ。["markdown", "rust", "aws"]のように指定する
@@ -8,7 +8,12 @@ published: true # 公開設定（falseにすると下書き）
 
 
 ## 事象内容
-ARN名など合っているはずなのにも関わらず、ValidationErrorが発生してしまう問題
+~~ARN名など合っているはずなのにも関わらず、ValidationErrorが発生してしまう問題~~
+原因はterraformで設定しているprofile誤りでした。。
+(正しいprofile情報を設定することで正常に通りました。)
+このようなミスが多いので気をつけよう。
+
+
 
 ## 発生条件
 - 0.12系から1.Xにterraformをバージョンアップ
