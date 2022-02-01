@@ -17,11 +17,12 @@ Encountered error while initiating handshake. KMSEncryption failed on client wit
 
 
 ## 発生条件
-以下条件にて発生する。マネージメントコンソールからのログインは問題なし。
+以下条件にて発生する。マネージメントコンソールからのログインは問題なし。※1
 - AWS SSOのプロファイルを有効にしている。
 - SessionManagerの設定でKMSを有効にしている。
 - AWS CLIでの実行
-
+※1・・・マネージメントコンソールでのログインでも
+KMSのキー管理者にSSOロールを設定する必要があると思われる（未検証)
 
 ## 解決策
 AWS公式回答によると 2022/02/02時点では解決策なし。
