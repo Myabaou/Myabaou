@@ -58,6 +58,10 @@ terraform providers lock \
 実行時「成功してくれ」と祈るようになっていた。
 Twitterなどで検索かけてみたら解決方法を呟いてくれている人がいて感謝
 @[card](https://twitter.com/kkoudev/status/1485507136449056768)
+注意
+template module がarm対応していない。。2022/02/07時点
+
+
 
 - 一度アンインストール
 ```sh
