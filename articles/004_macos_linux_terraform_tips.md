@@ -60,6 +60,8 @@ Twitterなどで検索かけてみたら解決方法を呟いてくれている�
 @[card](https://twitter.com/kkoudev/status/1485507136449056768)
 注意
 template module がarm対応していない。。2022/02/07時点
+2022/03/18 追記 対応していないのではなく、`Function`のtemplatefileを利用してということのようだ。
+@[card](https://www.terraform.io/language/functions/templatefile)
 
 
 
