@@ -7,7 +7,7 @@ published: true # 公開設定（falseにすると下書き）
 ---
 
 
-##　概要
+## 概要
 
 terraform state list を実行するとリソース名が
 ```
