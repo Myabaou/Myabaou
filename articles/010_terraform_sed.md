@@ -32,8 +32,8 @@ make _ENV=dev show _TARGET='module.vpc.aws_eip.nat[0]'
 ```
 
 sed実行箇所
-https://github.com/Myabaou/terraform_init_repo/blob/7bc482514bc961026d49c30a43f465cdb25cdb29/Makefile#L251
-
+https://github.com/Myabaou/terraform_init_repo/blob/12b6caa3e7147c6531dd8cd6aa601dc093dc2fb4/Makefile#L251
+→make の場合はシングルクォートで囲む必要がある。
 
 ## 備考
 
