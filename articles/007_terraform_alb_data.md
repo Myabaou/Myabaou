@@ -42,3 +42,31 @@ data "aws_lb_target_group" "selected" {
 ```
 
 もっといい方法がありそうだけど一旦これでOK
+
+## module内で定義する場合
+
+いつからかわからないけどmodule内でもdataリソースが利用できるようになっていた。（2022/10/27時点）
+※localとかを介さないと利用できなかった気がする。（勘違いかも)
+
+- Version情報
+```
+〉terraform -v
+Terraform v1.3.1
+on darwin_arm64
+```
+
+
+- 定義方法
+```
+data "aws_lb_listener" "selected80" {
+  load_balancer_arn = data.aws_lb.alb.arn
+  port              = 80
+}
+
+module "alb_listener_rules" {
+  source  = "../../modules/alb_listener_rules"
+  listener_arn = data.aws_lb_listener.selected80.arn
+}
+```
+
+よき。
