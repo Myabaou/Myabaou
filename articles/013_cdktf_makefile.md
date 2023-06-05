@@ -55,11 +55,11 @@ _TF ?= false
 
 
 define TERRAFORM_CMD
-	aws-vault exec $(_AWSPROFILE) -- terraform -chdir="cdktf.out/stacks/${ENV_ID}" $@
+	aws-vault exec $(_AWSPROFILE) -- terraform -chdir="cdktf.out/stacks/${_ENV}" $@
 endef
 
 define CDKTF_CMD
-	export ENV_ID=$(_ENV) && aws-vault exec $(_AWSPROFILE) -- cdktf $@ ${ENV_ID}
+	export ENV_ID=$(_ENV) && aws-vault exec $(_AWSPROFILE) -- cdktf $@ ${_ENV}
 endef
 
 %:
