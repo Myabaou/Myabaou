@@ -47,22 +47,46 @@ ENV_ID毎にtfstateファイルが生成されるようにする。
 
 ```makefile
 # (ex)
-# cdktfの場合: make _ENV=dev diff
-# terraformの場合: make _ENV=dev _TF=true "state list"
+# cdktfの場合: make _ENV=hotfix diff
+# terraformの場合: make _ENV=hotfix _TF=true "state list"
 _AWSPROFILE=aws-sample
 _ENV ?= dev
 _TF ?= false
 
 
+ifeq ($(_ENV),prd)
+_environment=production
+else ifeq ($(_ENV),stg)
+_environment=staging
+else
+_environment=$(_ENV)
+endif
+
+
+.PHONY: ensure-aws-auth
+# AWS SSO 認証していない場合再認証
+ensure-aws-auth:
+	@{ \
+	set +e ;\
+	IDENTITY=$$(aws sts get-caller-identity --profile $(_AWSPROFILE) 2>&1) ;\
+	if echo $$IDENTITY | grep -q 'The SSO session associated with this profile has expired or is otherwise invalid' ; then \
+		aws sso login --profile $(_AWSPROFILE) ;\
+	else \
+		echo "[INFO]: AWS SSO $(_AWSPROFILE) Authentication successful!" ;\
+	fi \
+	}
+
+
 define TERRAFORM_CMD
-	aws-vault exec $(_AWSPROFILE) -- terraform -chdir="cdktf.out/stacks/${_ENV}" $@
+	aws-vault exec $(_AWSPROFILE) -- terraform -chdir="cdktf.out/stacks/${_environment}" $@
 endef
 
 define CDKTF_CMD
-	export ENV_ID=$(_ENV) && aws-vault exec $(_AWSPROFILE) -- cdktf $@ ${_ENV}
+	export ENV_ID=$(_environment) && aws-vault exec $(_AWSPROFILE) -- cdktf $@ ${_environment}
 endef
 
 %:
+	@make ensure-aws-auth 
 	@if [ "$(_TF)" = "true" ]; then \
 		echo "[CMD]: $(TERRAFORM_CMD)"; \
 		$(TERRAFORM_CMD); \
