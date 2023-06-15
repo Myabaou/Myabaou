@@ -14,7 +14,7 @@ GitHubで管理するまでもないので記事。
 
 ## 前提条件
 - aws-vaultインストール済
-
+- [infracost](https://www.infracost.io/)インストール済
 - cdktf.jsonに以下を追記
 ```json
   "envconfig": {
@@ -43,12 +43,15 @@ ENV_ID毎にtfstateファイルが生成されるようにする。
 ```
 
 ## Makefile内容
-
+- 2023/06/15 infracostを組み込んでapply時にファイル出力 plan時に差分確認できるようにしました。
 
 ```makefile
 # (ex)
 # cdktfの場合: make _ENV=hotfix diff
 # terraformの場合: make _ENV=hotfix _TF=true "state list"
+# infracostをインストール済みじゃないと正常に稼働しない
+# Macの場合 brew install infracost
+
 _AWSPROFILE=aws-sample
 _ENV ?= dev
 _TF ?= false
@@ -63,7 +66,7 @@ _environment=$(_ENV)
 endif
 
 
-.PHONY: ensure-aws-auth
+.PHONY: ensure-aws-auth costview
 # AWS SSO 認証していない場合再認証
 ensure-aws-auth:
 	@{ \
@@ -76,6 +79,16 @@ ensure-aws-auth:
 	fi \
 	}
 
+costview:
+	export ENV_ID=$(_environment) && aws-vault exec $(_AWSPROFILE) -- cdktf synth ${_environment}
+	infracost breakdown --path cdktf.out/stacks/${_environment}
+
+costdiff:
+	export ENV_ID=$(_environment) && aws-vault exec $(_AWSPROFILE) -- cdktf synth ${_environment}
+	infracost diff --path cdktf.out/stacks/${_environment} --compare-to cost/infracost-${_environment}-base.json
+
+costfix:
+	infracost breakdown --path cdktf.out/stacks/${_environment} --format json --out-file cost/infracost-${_environment}-base.json
 
 define TERRAFORM_CMD
 	aws-vault exec $(_AWSPROFILE) -- terraform -chdir="cdktf.out/stacks/${_environment}" $@
@@ -93,7 +106,24 @@ endef
 	else \
 		echo "[CMD]: $(CDKTF_CMD)"; \
 		$(CDKTF_CMD); \
-	fi
+	fi;
+
+# infracostがインストールされていない場合は途中終了
+	@if ! command -v infracost > /dev/null; then \
+		echo "[INFO]infracost is not installed. Aborting."; \
+		exit 1; \
+	fi; \
+	\
+
+	@if [ "$@" = "deploy" -o "$@" = "apply" ]; then \
+		echo "[INFO]: ${_environment} Cost is Fixed. "; \
+		make _ENV=${_ENV} costfix; \
+	elif [ "$@" = "diff" -o "$@" = "plan" ]; then \
+		echo "[INFO]: ${_environment} Cost Checkd. "; \
+		make _ENV=${_ENV} costdiff; \
+    else \
+		echo "[INFO]: ${_environment} infracost no operation. "; \
+	fi;
 ```
 
 ## 実行方法
