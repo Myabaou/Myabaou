@@ -94,7 +94,7 @@ brew unlink tfenv
 
 ---
 
-##　試行錯誤記録
+## 試行錯誤記録
 
 cdktf-cliの再インストール
 cdktfの再インストール
