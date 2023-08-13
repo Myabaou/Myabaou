@@ -81,15 +81,6 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Add labels to PR
-      run: |
-        LABELS=$(echo "${{ steps.get-labels.outputs.labels }}" | sed 's/,$//')  # Remove trailing comma
-        LABELS_ARRAY=($(echo "$LABELS" | tr ',' '\n'))
-        LABELS_JSON="[$(printf '"%s",' "${LABELS_ARRAY[@]}" | sed 's/,$//')]"
-        echo $LABELS_JSON
-        echo "::set-output name=labels::$LABELS"
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Add labels to new PR
       run: |
@@ -110,7 +101,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## 所管
+## 所感
 
 作ってみたものの利便性が劇的にあがるかどうかイメージなしw
 なんか労力に見合わないというのとこんな処理で
