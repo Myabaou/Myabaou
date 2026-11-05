@@ -1,0 +1,23 @@
+name: Latest Zenn Articles
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # 01:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-readme-push
+  cancel-in-progress: false
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: gautamkrishnar/blog-post-workflow@v1
+        with:
+          feed_list: "https://zenn.dev/myabaou/feed"
+          max_post_count: 5
