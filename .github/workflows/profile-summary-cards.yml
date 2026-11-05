@@ -1,0 +1,37 @@
+name: Profile Summary Cards
+
+on:
+  schedule:
+    - cron: "0 15 * * *" # 00:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-readme-push
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Generate cards (light)
+        uses: vn7n24fzkq/github-profile-summary-cards@v0.13.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: ${{ github.repository_owner }}
+          BRANCH_NAME: main
+          TIME_ZONE: Asia/Tokyo
+          THEME: github
+      - name: Generate cards (dark)
+        uses: vn7n24fzkq/github-profile-summary-cards@v0.13.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: ${{ github.repository_owner }}
+          BRANCH_NAME: main
+          TIME_ZONE: Asia/Tokyo
+          THEME: github_dark
